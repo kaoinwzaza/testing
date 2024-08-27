@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiragana and Romanji Random Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .character {
+            font-size: 100px;
+            margin-top: 20px;
+        }
+        .checkbox-container {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+        .checkbox-section {
+            width: 200px;
+            margin-right: 20px;
+            text-align: left;
+        }
+        .checkbox-section label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .collapsible {
+            cursor: pointer;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f1f1f1;
+        }
+        .collapsible-content {
+            display: none;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hiragana and Romanji Random Generator</h1>
+
+    <form id="hiraganaForm">
+        <div class="checkbox-container">
+            <div class="checkbox-section">
+                <div class="collapsible" onclick="toggleCollapsible('hiraganaContent')">Hiragana Characters</div>
+                <div id="hiraganaContent" class="collapsible-content">
+                    <label>
+                        <input type="checkbox" name="characters" value="aiueo">
+                        あいうえお
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="kakikukeko">
+                        かきくけこ
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="sashiseso">
+                        さしすせそ
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="tchitsute">
+                        たちつてと
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="nonnanyon">
+                        なにぬねの
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="hifuhheho">
+                        はひふへほ
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="mimiwa">
+                        まみむめも
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="yuyu">
+                        やゆよ
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="raware">
+                        らりるれろ
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="wonn">
+                        わをん
+                    </label>
+                </div>
+            </div>
+            <div class="checkbox-section">
+                <div class="collapsible" onclick="toggleCollapsible('romanjiContent')">Romanji Characters</div>
+                <div id="romanjiContent" class="collapsible-content">
+                    <label>
+                        <input type="checkbox" name="characters" value="aiueo2">
+                        a i u e o
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="kakikukeko2">
+                        ka ki ku ke ko
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="sashiseso2">
+                        sa shi su se so
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="tchitsute2">
+                        ta chi tsu te to
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="nonnanyon2">
+                        na ni nu ne no
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="hifuhheho2">
+                        ha hi fu he ho
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="mimiwa2">
+                        ma mi mu me mo
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="yuyu2">
+                        ya yu yo
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="raware2">
+                        ra ri ru re ro
+                    </label>
+                    <label>
+                        <input type="checkbox" name="characters" value="wonn2">
+                        wa wo n
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+        <button type="button" onclick="generateCharacter()">Generate</button>
+    </form>
+
+    <div class="character" id="result"></div>
+
+    <script>
+        const hiraganaSets = {
+            aiueo: ["あ", "い", "う", "え", "お"],
+            kakikukeko: ["か", "き", "く", "け", "こ"],
+            sashiseso: ["さ", "し", "す", "せ", "そ"],
+            tchitsute: ["た", "ち", "つ", "て", "と"],
+            nonnanyon: ["な", "に", "ぬ", "ね", "の"],
+            hifuhheho: ["は", "ひ", "ふ", "へ", "ほ"],
+            mimiwa: ["ま", "み", "む", "め", "も"],
+            yuyu: ["や", "ゆ", "よ"],
+            raware: ["ら", "り", "る", "れ", "ろ"],
+            wonn: ["わ", "を", "ん"]
+        };
+        const romanjiSets = {
+            aiueo2: ["a", "i", "u", "e", "o"],
+            kakikukeko2: ["ka", "ki", "ku", "ke", "ko"],
+            sashiseso2: ["sa", "shi", "su", "se", "so"],
+            tchitsute2: ["ta", "chi", "tsu", "te", "to"],
+            nonnanyon2: ["na", "ni", "nu", "ne", "no"],
+            hifuhheho2: ["ha", "hi", "fu", "he", "ho"],
+            mimiwa2: ["ma", "mi", "mu", "me", "mo"],
+            yuyu2: ["ya", "yu", "yo"],
+            raware2: ["ra", "ri", "ru", "re", "ro"],
+            wonn2: ["wa", "wo", "n"]
+        };
+
+        function toggleCollapsible(id) {
+            const content = document.getElementById(id);
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+
+        function generateCharacter() {
+            const selectedSets = Array.from(document.querySelectorAll('input[name="characters"]:checked'))
+                .map(input => {
+                    if (input.value.endsWith('2')) {
+                        return romanjiSets[input.value];
+                    } else {
+                        return hiraganaSets[input.value];
+                    }
+                })
+                .flat();
+
+            if (selectedSets.length > 0) {
+                const randomCharacter = selectedSets[Math.floor(Math.random() * selectedSets.length)];
+                document.getElementById('result').textContent = randomCharacter;
+            } else {
+                document.getElementById('result').textContent = "Please select at least one set.";
+            }
+        }
+    </script>
+
+</body>
+</html>
